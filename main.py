@@ -80,7 +80,13 @@ def main():
                     print("Cadastre categorias e fornecedores antes.")
                     continue
 
-                codigo = int(input("Código: "))
+                # Gerar código automaticamente
+                if len(produtos) == 0:
+                    codigo = 1
+                else:
+                    codigo = len(produtos) + 1
+
+                print(f"Código do novo produto: {codigo}") 
                 nome = input("Nome: ")
                 preco = float(input("Preço: "))
 
