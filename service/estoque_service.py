@@ -22,3 +22,7 @@ class EstoqueService:
             produto = item["produto"]
             quantidade = item["quantidade"]
             print(f"{produto} | Quantidade: {quantidade}")
+    
+    
+    def remover_cadastro_produto(self, codigo):
+        self.estoque.excluir_produto(codigo)

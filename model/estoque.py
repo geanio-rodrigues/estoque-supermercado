@@ -33,3 +33,10 @@ class Estoque:
 
     def listar(self):
         return self.__itens
+
+
+    def excluir_produto(self, codigo):
+        if codigo in self.__itens:
+            del self.__itens[codigo]
+            return True
+        return False

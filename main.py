@@ -16,8 +16,8 @@ def menu_adicionar():
     print("\n--- MENU ADICIONAR ---")
     print("1 - Nova Categoria")
     print("2 - Novo Fornecedor")
-    print("3 - Novo Produto (Já insere no estoque)")
-    print("4 - Entrada de Estoque (Produto existente)")
+    print("3 - Novo Produto")
+    print("4 - Entrada de Estoque")
     print("0 - Voltar")
     return input("Escolha: ")
 
@@ -25,8 +25,8 @@ def menu_remover():
     print("\n--- MENU REMOVER ---")
     print("1 - Excluir Categoria")
     print("2 - Excluir Fornecedor")
-    print("3 - Excluir Produto (Cadastro completo)")
-    print("4 - Saída de Estoque (Baixa de quantidade)")
+    print("3 - Excluir Produto")
+    print("3 - Saída de Estoque")
     print("0 - Voltar")
     return input("Escolha: ")
 
@@ -39,8 +39,8 @@ def menu_listar():
     return input("Escolha: ")
 
 def main():
-    categorias = []
-    fornecedores = []
+    categorias = [Categoria("Geral")]
+    fornecedores = [Fornecedor("Padrão", 0000)]
     produtos = []
 
     estoque = Estoque()
@@ -80,6 +80,9 @@ def main():
                     nome = input("Nome: ")
                     preco = float(input("Preço: "))
 
+                    qtd_input = input("Quantidade inicial no estoque (Enter para 1): ")
+                    qtd_inicial = int(qtd_input) if qtd_input.strip() else 1
+
                     print("\nCategorias:")
                     for i, c in enumerate(categorias): print(f"{i} - {c}")
                     cat = categorias[int(input("Escolha a categoria: "))]
@@ -91,9 +94,6 @@ def main():
                     novo_produto = Produto(codigo, nome, preco, cat, forn)
                     produtos.append(novo_produto)
 
-                    qtd_input = input("Quantidade inicial no estoque (Enter para 0): ")
-                    qtd_inicial = int(qtd_input) if qtd_input.strip() else 0
-                    
                     estoque_service.entrada_produto(novo_produto, qtd_inicial)
                     print(f"Produto cadastrado com {qtd_inicial} unidades.")
 
@@ -138,9 +138,13 @@ def main():
                         print("Nenhum produto para remover.")
                     else:
                         for i, p in enumerate(produtos): print(f"{i} - {p}")
-                        idx = int(input("Índice para remover: "))
-                        produtos.pop(idx)
-                        print("Produto removido do sistema.")
+                        try:
+                            idx = int(input("Índice para remover: "))
+                            produto = produtos[idx]
+                            estoque_service.remover_cadastro_produto(produto.codigo)
+                            produtos.pop(idx)
+                        except IndexError:
+                            print("Erro: Código índice inválido")
 
                 elif sub_op == "4":
                     if not produtos:
@@ -170,7 +174,6 @@ def main():
                         for f in fornecedores: print(f)
 
                 elif sub_op == "3":
-                    # O método listar() do estoque já retorna um dict vazio se não tiver nada
                     if not estoque.listar():
                         print("--- Estoque vazio ---")
                     else:
