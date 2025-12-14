@@ -20,7 +20,7 @@ class Estoque:
             }
 
     
-    def remover(self, produto, quantidade):
+    def remover(self, codigo, quantidade):
         if codigo not in self.__itens:
             return False
 

@@ -16,12 +16,12 @@ class Fornecedor:
     def nome(self, novo_nome):
         if not isinstance(novo_nome, str) or not novo_nome.strip():
             raise ValueError("O nome do fornecedor deve ser um texto não vazio")
-        self.__nome
+        self.__nome = novo_nome
     
     @telefone.setter
     def telefone(self, novo_telefone):
-        if not isinstance(novo_telefone, int) or not novo_telefone.strip():
-            raise ValueError("O telefone deve ser um número não vazio")
+        if not isinstance(novo_telefone, int):
+            raise ValueError("O telefone deve ser um número")
         self.__telefone = novo_telefone
 
     def __str__(self):
