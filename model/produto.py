@@ -46,8 +46,8 @@ class Produto:
     @preco.setter
     def preco(self, novo_preco):
         if not isinstance(novo_preco, (int, float)) or novo_preco < 0:
-            raiser ValueError("O preço deve ser um número maior que 0")
-        self.__preco = floar(novo_preco)
+            raise ValueError("O preço deve ser um número maior que 0")
+        self.__preco = float(novo_preco)
 
     @categoria.setter
     def categoria(self, nova_categoria):
