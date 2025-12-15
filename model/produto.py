@@ -64,5 +64,7 @@ class Produto:
     def __str__(self):
         return (
             f"[{self.codigo}] {self.nome} | "
-            f"R$ {self.preco:.2f} | Categoria: {self.categoria}"
+            f"R$ {self.preco:.2f} | "
+            f"Categoria: {self.categoria} | "
+            f"Fonecedor: {self.fornecedor.nome}"
         )
