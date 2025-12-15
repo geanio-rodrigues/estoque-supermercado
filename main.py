@@ -20,7 +20,7 @@ def menu_remover():
     print("1 - Excluir Categoria")
     print("2 - Excluir Fornecedor")
     print("3 - Excluir Produto")
-    print("3 - Saída de Estoque")
+    print("4 - Saída de Estoque")
     print("0 - Voltar")
     return input("Escolha: ")
 
