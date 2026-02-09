@@ -54,6 +54,54 @@ A interface com o usuário.
 
 **Justificativa:** Mantém o código de interação (inputs/prints) separado da lógica de negócio. Se quisermos mudar para uma interface gráfica no futuro, a lógica principal não precisa ser reescrita.
 
+---
+## 🗄️ Projeto Físico de Banco de Dados
+
+```mermaid
+erDiagram
+    TB_CATEGORIA {
+        int id PK
+        string nome
+    }
+    TB_FORNECEDOR {
+        int id PK
+        string nome
+        string cnpj UK
+        string telefone
+    }
+    TB_PRODUTO {
+        int id PK
+        string nome
+        decimal preco
+        int categoria_id FK
+        int fornecedor_id FK
+    }
+
+    TB_CATEGORIA ||--|{ TB_PRODUTO : "possui"
+    TB_FORNECEDOR ||--|{ TB_PRODUTO : "fornece"
+```
+### 🛠️ Decisões Técnicas e Justificativas
+1.  **Tipagem de Dados:**
+    * **Preço (`DECIMAL(10,2)`):** Utilizado em vez de `FLOAT` para garantir precisão monetária e evitar erros de arredondamento em cálculos financeiros.
+    * **CNPJ (`CHAR(14)`):** Definido como tamanho fixo para otimizar armazenamento, já que o padrão é constante.
+2.  **Integridade e Restrições:**
+    * **`CHECK (preco >= 0)`:** Restrição de segurança no nível do banco para impedir cadastro de preços negativos, independente da validação do software.
+    * **`ON DELETE RESTRICT`:** Impede que uma Categoria ou Fornecedor seja excluído acidentalmente se houver produtos vinculados a eles.
+3.  **Performance:**
+    * Criação de índice (`idx_produto_nome`) na coluna nome do produto, visando acelerar a busca no PDV (Ponto de Venda), que é a operação mais frequente.
+
+### 🎓 O que é Projeto Físico?
+*Para estudantes iniciantes:*
+
+Se o **Modelo Conceitual** é o esboço de um arquiteto e o **Lógico** é a planta baixa, o **Projeto Físico** é a construção real. É o momento onde traduzimos nossos diagramas para a linguagem que o computador entende (SQL).
+
+É nesta etapa que decidimos questões vitais:
+* **Segurança:** "O banco deve bloquear preços negativos?"
+* **Eficiência:** "Qual o tipo de dado ocupa menos espaço?"
+* **Velocidade:** "Como criar atalhos (índices) para achar dados rápido?"
+
+Um bom projeto físico é o que diferencia um sistema lento e frágil de um sistema robusto e profissional.
+
 ## 💻 Como Rodar e Testar
 
 ### Pré-requisitos
