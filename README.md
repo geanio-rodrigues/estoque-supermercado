@@ -91,9 +91,8 @@ erDiagram
     * Criação de índice (`idx_produto_nome`) na coluna nome do produto, visando acelerar a busca no PDV (Ponto de Venda), que é a operação mais frequente.
 
 ### 🎓 O que é Projeto Físico?
-*Para estudantes iniciantes:*
 
-Se o **Modelo Conceitual** é o esboço de um arquiteto e o **Lógico** é a planta baixa, o **Projeto Físico** é a construção real. É o momento onde traduzimos nossos diagramas para a linguagem que o computador entende (SQL).
+Imagine que construir um software é como construir uma casa. O **Modelo Conceitual** é o esboço de um arquiteto e o **Lógico** é a planta baixa, o **Projeto Físico** é o momento de ir para a obra e decidir os materiais reais: "Vamos usar tijolo ou bloco de concreto?". No mundo da programação, o Projeto Físico é quando traduzimos nossos diagramas abstratos para a linguagem que o computador entende (SQL).
 
 É nesta etapa que decidimos questões vitais:
 * **Segurança:** "O banco deve bloquear preços negativos?"
