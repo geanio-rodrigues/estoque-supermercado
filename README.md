@@ -59,17 +59,17 @@ A interface com o usuário.
 
 ```mermaid
 erDiagram
-    TB_CATEGORIA {
+    Categorias {
         int id PK
         string nome
     }
-    TB_FORNECEDOR {
+    Fornecedores {
         int id PK
         string nome
         string cnpj UK
         string telefone
     }
-    TB_PRODUTO {
+    Produtos {
         int id PK
         string nome
         decimal preco
@@ -77,8 +77,8 @@ erDiagram
         int fornecedor_id FK
     }
 
-    TB_CATEGORIA ||--|{ TB_PRODUTO : "possui"
-    TB_FORNECEDOR ||--|{ TB_PRODUTO : "fornece"
+    Categorias ||--|{ Produtos : "possui"
+    Fornecedores ||--|{ Produtos : "fornece"
 ```
 ### 🛠️ Decisões Técnicas e Justificativas
 1.  **Tipagem de Dados:**
